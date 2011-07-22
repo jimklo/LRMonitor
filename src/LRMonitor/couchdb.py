@@ -81,8 +81,8 @@ class DBStats(BasicStats):
         stats = self._getStats(opts)
         buflist = []
         for (key, value) in stats.items():
-            if isinstance(value, (types.IntType, types.LongType, types.FloatType)):
-                buflist.append("{0}:{1}".format(key, value))
+            if isinstance(value, (types.IntType, types.LongType, types.FloatType, types.BooleanType)):
+                buflist.append("{0}:{1}".format(key, int(value)))
         return " ".join(buflist)
     
 class ViewStats(BasicStats):
@@ -98,10 +98,9 @@ class ViewStats(BasicStats):
         buflist = []
         if "view_index" in stats:
             for (key, value) in stats["view_index"].items():
-                if isinstance(value, (types.IntType, types.LongType, types.FloatType)):
+                if isinstance(value, (types.IntType, types.LongType, types.FloatType, types.BooleanType)):
                     buflist.append("{0}:{1}".format(key, int(value)))
-                elif isinstance(value, types.BooleanType):
-                    buflist.append("{0}:{1}".format(key, int(value)))
+
                 
         return " ".join(buflist)
     
